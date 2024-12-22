@@ -201,6 +201,7 @@
   export const calculationService = {
     async performCalculation(format: CalculationFormat, x: number, y: number): Promise<Calculation> {
       // Implementation for each calculation type
+      
       // Return calculation result with steps
     },
 
