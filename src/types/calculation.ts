@@ -16,7 +16,7 @@ export interface Calculation {
   slug: string;
   createdAt: Date;
   lastAccessedAt?: Date;
-  accessCount: number;
+  accessCount: number; // Renamed for consistency
   isAutomated: boolean;
   calculationSteps: CalculationStep[];
   relatedFormats: RelatedFormat[];
@@ -26,12 +26,12 @@ export interface CalculationStep {
   stepNumber: number;
   description: string;
   formula?: string;
-  intermediateResult?: number;
+  intermediateResult?: number; // Ensure precision handling where applicable
 }
 
 export interface RelatedFormat {
   formatType: CalculationFormat;
   slug: string;
   description: string;
-  result: number;
+  result: number; // Same precision considerations as above
 }

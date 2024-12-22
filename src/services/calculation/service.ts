@@ -176,17 +176,17 @@ export const calculationService = {
 
     // Create new calculation record
     const calculation: Omit<Calculation, 'id'> = {
-      formatType: format,
-      valueX: x,
-      valueY: y,
+      format_type: format,
+      value_x: x,
+      value_y: y,
       result,
       slug,
-      createdAt: new Date(),
-      lastAccessedAt: new Date(),
-      accessCount: 1,
-      isAutomated: false,
-      calculationSteps: steps,
-      relatedFormats: [] // Will be populated by generateRelatedCalculations
+      created_at: new Date(),
+      last_accessed_at: new Date(),
+      access_count: 1,
+      is_automated: false,
+      calculation_steps: steps,
+      related_formats: [] // Will be populated by generateRelatedCalculations
     };
 
     const { data, error } = await supabase

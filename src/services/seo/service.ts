@@ -26,8 +26,13 @@ export const seoService = {
       [CalculationFormat.PERCENT_OFF]: `Calculate ${calculation.valueX}% off ${calculation.valueY}`
     };
 
-    const title = `${formatDescriptions[calculation.formatType]} | Percentage Calculator`;
-    const description = `Learn how to ${formatDescriptions[calculation.formatType].toLowerCase()}. Step-by-step solution with detailed explanation. Result: ${calculation.result}`;
+    const descriptionTemplate = formatDescriptions[calculation.formatType];
+    if (!descriptionTemplate) {
+      throw new Error(`Invalid format type: ${calculation.formatType}`);
+    }
+
+    const title = `${descriptionTemplate} | Percentage Calculator`;
+    const description = `Learn how to ${descriptionTemplate.toLowerCase()}. Step-by-step solution with detailed explanation. Result: ${calculation.result}`;
 
     return {
       title,
@@ -44,7 +49,7 @@ export const seoService = {
         name: title,
         description,
         eduQuestionType: 'Percentage Calculation',
-        text: formatDescriptions[calculation.formatType],
+        text: descriptionTemplate,
         resultText: `The result is ${calculation.result}`,
         steps: calculation.calculationSteps.map(step => ({
           '@type': 'Step',

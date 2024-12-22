@@ -9,9 +9,9 @@ describe('seoService', () => {
     valueY: 200,
     result: 20,
     slug: 'what-is-10-percent-of-200',
-    createdAt: new Date(),
+    created_at: new Date(),
     lastAccessedAt: new Date(),
-    accessCount: 1,
+    access_count: 1,
     isAutomated: false,
     calculationSteps: [
       {
