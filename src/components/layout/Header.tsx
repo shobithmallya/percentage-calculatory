@@ -1,20 +1,24 @@
 import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
 
 export default function Header() {
-  return (
-    <header className="bg-blue-600 text-white p-4">
-      <h1 className="text-2xl font-bold">Percentage Calculator</h1>
-      <nav>
-        <ul className="flex space-x-4">
-          <li>
-            <Link href="/">Home</Link>
-          </li>
-          <li>
-            <Link href="/about">About</Link>
-          </li>
-          {/* Add more links as needed */}
-        </ul>
-      </nav>
-    </header>
-  );
-} 
+    return (
+        <header className="border-b">
+        <div className="container mx-auto px-4 py-4">
+          <nav className="flex items-center justify-between">
+            <div className="flex items-center space-x-6">
+              <span className="font-bold text-xl">Logo</span>
+              <Separator orientation="vertical" className="h-6" />
+              <div className="space-x-4">
+                <a href="#" className="text-sm text-gray-600 hover:text-gray-900">Docs</a>
+                <a href="#" className="text-sm text-gray-600 hover:text-gray-900">Components</a>
+                <a href="#" className="text-sm text-gray-600 hover:text-gray-900">Blocks</a>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </header>
+    );
+}
+
