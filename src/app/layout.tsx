@@ -3,6 +3,11 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
+import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import About from "@/components/layout/About";
+import { Toaster } from "@/components/ui/toaster";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,9 +32,25 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <div className="container mx-auto px-4">
+        <div className="flex flex-col min-h-screen">     
+        <Header/>
+        <div className="container mx-auto px-4 flex-grow">
           <main>{children}</main>
+          <Toaster />
         </div>
+        <About /> 
+        
+        {/* <Card className="max-w-6xl mx-auto p-6 bg-white mt-8 mb-8">
+          <CardHeader>
+            <CardTitle>Create project</CardTitle>
+            <CardDescription>Deploy your new project in one-click.</CardDescription>
+          </CardHeader>
+          <CardFooter className="flex justify-between">        <Button>Deploy</Button>
+          </CardFooter>
+        </Card> */}
+        <Footer />
+        </div>
+        
       </body>
     </html>
   );

@@ -6,10 +6,10 @@ interface Props {
 
 export default function ResultDisplay({ calculation }: { calculation: any }) {
     return (
-      <div className="rounded-lg border p-4">
+      <div>
         <h2 className="text-xl font-bold">Result: {calculation.result}</h2>
         <p>
-          {calculation.format_type?.replace(/_/g, ' ') || 'Unknown'} calculation
+          {calculation.format_type?.replace(/_/g, ' ') || 'Unknown'} Calculation
         </p>
         <h3 className="font-semibold">Steps:</h3>
         <ul>

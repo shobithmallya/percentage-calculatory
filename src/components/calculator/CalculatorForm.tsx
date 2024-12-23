@@ -6,14 +6,9 @@ import { calculationService } from '@/services/calculation/service';
 import { useRouter } from 'next/navigation';
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card"
+import { Input } from '@/components/ui/input';
+import { useToast } from "@/hooks/use-toast";
 
 interface CalculatorFormProps {
     setCalculationResult: (result: any) => void; // Adjust type as needed
@@ -25,10 +20,20 @@ export default function CalculatorForm({ setCalculationResult }: CalculatorFormP
     const [format, setFormat] = useState<CalculationFormat>(CalculationFormat.PERCENTAGE_OF);
     const [error, setError] = useState<string | null>(null);
     const router = useRouter();
+    const { toast } = useToast();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError(null); // Reset error state
+
+        if (valueX <= 0 || valueY <= 0) {
+            toast({
+                title: "Invalid Input",
+                description: "Please enter values greater than 0.",
+                variant: "destructive",
+            });
+            return;
+        }
 
         try {
             const calculationResult = await calculationService.performCalculation(format, valueX, valueY);
@@ -41,11 +46,11 @@ export default function CalculatorForm({ setCalculationResult }: CalculatorFormP
     };
 
     return (
-        <form onSubmit={handleSubmit} className="mx-auto px-4">
-            <div className='space-y-2 mb-8'>
-                <label htmlFor="format">Calculation Type:</label>
-                <Tabs value={format} onValueChange={(value) => setFormat(value as CalculationFormat)} className="p-2 w-full">
-                    <TabsList className="grid grid-cols-5 h-auto">
+        <form onSubmit={handleSubmit} className="mx-auto flex flex-col p-6 border-b">
+            <div className='mb-8'>
+                <label htmlFor="format">Choose Calculation Type</label>
+                <Tabs value={format} onValueChange={(value) => setFormat(value as CalculationFormat)} className="mt-4 w-full">
+                    <TabsList className="grid grid-cols-5 h-auto rounded-">
                         <TabsTrigger className="px-4 py-2 h-auto" value={CalculationFormat.PERCENTAGE_OF}>What is X% of Y</TabsTrigger>
                         <TabsTrigger className="px-4 py-2 h-auto" value={CalculationFormat.RATIO_TO_PERCENT}>X/Y as a percent</TabsTrigger>
                         <TabsTrigger className="px-4 py-2 h-auto" value={CalculationFormat.OUT_OF_PERCENTAGE}>X out of Y as a percentage</TabsTrigger>
@@ -58,10 +63,10 @@ export default function CalculatorForm({ setCalculationResult }: CalculatorFormP
                 </Tabs>
             </div>
             <Card className="w-full">
-                <CardContent className="space-y-6 p-6">
+                <CardContent className="space-y-6">
                     <div className="space-y-2">
                         <label htmlFor="valueX">Value X:</label>
-                        <input
+                        <Input
                             type="number"
                             id="valueX"
                             value={valueX}
@@ -72,7 +77,7 @@ export default function CalculatorForm({ setCalculationResult }: CalculatorFormP
                     </div>
                     <div className="space-y-2">
                         <label htmlFor="valueY">Value Y:</label>
-                        <input
+                        <Input
                             type="number"
                             id="valueY"
                             value={valueY}
@@ -92,7 +97,6 @@ export default function CalculatorForm({ setCalculationResult }: CalculatorFormP
                     {error && <p className="text-red-500">{error}</p>}
                 </CardContent>
             </Card>
-
         </form>
     );
 } 

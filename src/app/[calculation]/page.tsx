@@ -24,9 +24,9 @@ export default async function CalculationPage({ params }: Props) {
     const formatType = calculation.formatType?.replace(/_/g, ' ') || 'Unknown';
   
     return (
-      <div className="max-w-4xl mx-auto">
+      <div className=" max-w-screen-xl mx-auto px-8 py-4 border-l border-r border-grid border-b">
         <h1 className="text-3xl font-bold text-center mb-8">
-          {formatType} Calculator
+        {calculation.format_type?.replace(/_/g, ' ') || 'Unknown'} Calculator
         </h1>
         <ResultDisplay calculation={calculation} />
       </div>
